@@ -54,7 +54,13 @@ const MOCK_PROPERTIES: Property[] = [
 ];
 
 export async function getProperties(): Promise<Property[]> {
-  return fetchRealTimeListings();
+  try {
+    const properties = await fetchRealTimeListings();
+    return properties.length > 0 ? properties : MOCK_PROPERTIES;
+  } catch (error) {
+    console.error("Error in getProperties:", error);
+    return MOCK_PROPERTIES;
+  }
 }
 
 function cleanDescription(description?: string): string | undefined {

@@ -2,6 +2,8 @@ import { fetchRealTimeListings } from "@/lib/api";
 import { FeatureCard } from "@/components/molecules/FeatureCard";
 import { Navbar } from "@/components/organisms/Navbar";
 
+export const dynamic = 'force-dynamic';
+
 export default async function RealTimePropertiesPage() {
   // This is a Next.js Server Component
   // fetchRealTimeListings uses the native fetch API with caching options
