@@ -14,6 +14,51 @@
   }
 }
 
+
+
+@layer components {
+  .content-page {
+    @apply max-w-4xl mx-auto px-4 text-gray-700 leading-relaxed;
+  }
+
+  .content-page h1 {
+    @apply text-4xl md:text-5xl font-bold text-navy mb-6 leading-tight;
+  }
+
+  .content-page h2 {
+    @apply text-2xl md:text-3xl font-bold text-navy mt-10 mb-4;
+  }
+
+  .content-page h3 {
+    @apply text-xl md:text-2xl font-bold text-navy mt-8 mb-3;
+  }
+
+  .content-page p {
+    @apply mb-5;
+  }
+
+  .content-page a {
+    @apply text-gold font-semibold hover:text-gold-dark underline underline-offset-4;
+  }
+
+  .content-page ol {
+    @apply list-decimal pl-6 mb-6 space-y-3;
+  }
+
+  .content-page ul {
+    @apply list-disc pl-6 mb-6 space-y-3;
+  }
+
+  .content-page li {
+    @apply pl-1;
+  }
+
+  .content-page strong {
+    @apply font-bold text-navy;
+  }
+}
+
+
 body {
   color: var(--foreground);
   background: var(--background);
