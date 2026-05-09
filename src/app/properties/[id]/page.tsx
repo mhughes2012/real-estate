@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getPropertyById } from '@/lib/api';
 import { Navbar } from '@/components/organisms/Navbar';
 import Image from 'next/image';
@@ -53,16 +54,7 @@ export default async function PropertyDetailPage({ params }: Props) {
   const property = await getPropertyById(params.id);
 
   if (!property) {
-    return (
-      <main className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-navy mb-4">Property not found</h1>
-          <Link href="/properties">
-            <Button>Back to Listings</Button>
-          </Link>
-        </div>
-      </main>
-    );
+    notFound();
   }
 
   const formattedPrice = new Intl.NumberFormat('en-CA', {
