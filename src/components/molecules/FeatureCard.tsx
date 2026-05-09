@@ -1,8 +1,8 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Property } from '@/types';
 import { Bed, Bath, Square, MapPin } from 'lucide-react';
+import { PropertyImageSlider } from './PropertyImageSlider';
 
 interface FeatureCardProps {
   property: Property;
@@ -18,15 +18,8 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ property }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden border border-white-muted group hover:shadow-xl transition-all duration-300">
       {/* Image Container */}
-      <div className="relative h-64 w-full overflow-hidden">
-        {/* Fallback color if image fails to load */}
-        <div className="absolute inset-0 bg-navy-light/10" />
-        <Image
-          src={property.images[0] || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'}
-          alt={property.title}
-          fill
-          className="object-cover transform group-hover:scale-110 transition-transform duration-500"
-        />
+      <div className="relative h-64 w-full">
+        <PropertyImageSlider images={property.images} title={property.title} />
         <div className="absolute top-4 left-4 bg-navy text-white px-3 py-1 text-xs font-semibold uppercase tracking-wider">
           {property.listingType === 'sale' ? 'For Sale' : 'For Rent'}
         </div>
