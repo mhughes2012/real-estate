@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '*.realtor.ca',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
   },
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Property } from '@/types';
 import { Bed, Bath, Square, MapPin } from 'lucide-react';
 
@@ -42,9 +43,11 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ property }) => {
 
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-md font-bold text-navy flex-1 uppercase" title={property.title}>
-            {property.address.full} in {property.address.city}: {property.subDivision} {property.type}
-          </h3>
+          <Link href={`/properties/${property.id}`} className="flex-1">
+            <h3 className="text-md font-bold text-navy uppercase hover:text-gold transition-colors" title={property.title}>
+              {property.address.full} in {property.address.city}: {property.subDivision} {property.type}
+            </h3>
+          </Link>
           <span className="text-gold font-bold text-xl ml-4">
             {formattedPrice}
           </span>
@@ -80,9 +83,9 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ property }) => {
 
         <div className="flex justify-between items-center text-xs text-gray-400 font-medium uppercase tracking-tighter">
           <span>MLS®: {property.mlsId}</span>
-          <button className="text-navy hover:text-gold transition-colors font-bold uppercase tracking-wider">
+          <Link href={`/properties/${property.id}`} className="text-navy hover:text-gold transition-colors font-bold uppercase tracking-wider">
             View Details →
-          </button>
+          </Link>
         </div>
       </div>
     </div>

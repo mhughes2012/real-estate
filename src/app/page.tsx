@@ -56,12 +56,16 @@ export default async function Home() {
               With over 15 years of experience in the luxury real estate market, Sheryl Thompson provides unparalleled expertise and personalized service.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="secondary" size="lg" className="uppercase tracking-widest px-10">
-                Book a Consultation
-              </Button>
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-navy uppercase tracking-widest px-10">
-                Meet Sheryl
-              </Button>
+              <Link href="/contact">
+                <Button variant="secondary" size="lg" className="uppercase tracking-widest px-10">
+                  Book a Consultation
+                </Button>
+              </Link>
+              <Link href="/about">
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-navy uppercase tracking-widest px-10">
+                  Meet Sheryl
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

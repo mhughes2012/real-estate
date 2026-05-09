@@ -117,7 +117,7 @@ export async function fetchRealTimeListings(): Promise<Property[]> {
         beds: item.BedroomsTotal || 0,
         baths: item.BathroomsTotalInteger || 0,
         sqft: item.AboveGradeFinishedArea || 0,
-        images: images.length > 0 ? images : ["/images/property-placeholder.jpg"],
+        images: images.length > 0 ? images : ["https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070"],
         type: item.PropertySubType || "Residential",
         listingType: 'sale',
         status: 'Active',
