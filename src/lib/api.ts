@@ -100,7 +100,7 @@ export async function fetchRealTimeListings(): Promise<Property[]> {
         images = item.Photos.map((p: any) => typeof p === 'string' ? p : p.URL);
       }
 
-      console.log('item', item);
+      // console.log('item', item);
 
       return {
         id: item.ListingKey || item.ID || Math.random().toString(),
