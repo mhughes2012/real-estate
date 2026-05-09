@@ -18,7 +18,7 @@ export default function AboutPage() {
           </div>
           <div className="bg-white-clean p-10 border border-white-muted rounded-lg">
             <h2 className="text-2xl font-bold text-navy mb-6 uppercase tracking-tight">Our Philosophy</h2>
-            <p className="text-gray-500 italic">"Luxury is not a price point, it's an experience."</p>
+            <p className="text-gray-500 italic">&#34;Luxury is not a price point, it&#39;s an experience.&#34;</p>
           </div>
         </div>
       </div>

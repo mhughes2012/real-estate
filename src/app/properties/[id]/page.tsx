@@ -5,7 +5,6 @@ import { Navbar } from '@/components/organisms/Navbar';
 import Image from 'next/image';
 import { MapPin, Bed, Bath, Square, Share2, Heart } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
-import Link from 'next/link';
 
 interface Props {
   params: { id: string };

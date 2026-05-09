@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Navbar } from "@/components/organisms/Navbar";
 
 export default function BuyerGuidePage() {
@@ -10,8 +11,16 @@ export default function BuyerGuidePage() {
                         <h1 className="text-4xl font-bold text-navy mb-4">Buyer&#39;s guide</h1>
                         <section className="pt-32 pb-20 bg-white-clean">
                             <div className="content-page">
-                                <h1><img src="/images/Calgary_houses-1.jpg"
-                                                                           alt=""/></h1>
+                                <h1>
+                                    <Image
+                                        src="/images/Calgary_houses-1.jpg"
+                                        alt="Calgary houses"
+                                        width={1200}
+                                        height={800}
+                                        className="h-auto w-full"
+                                        priority
+                                    />
+                                </h1>
                                         <h1>Search The Best Neighbourhoods in Calgary</h1>
                                         <h2>Are you buying in the Greater Calgary Area?</h2>
                                         <p>House hunting can be both exciting and stressful. When purchasing a home, you
