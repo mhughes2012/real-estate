@@ -6,7 +6,7 @@ import { MapPin, Info, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 /**
@@ -22,7 +22,8 @@ interface Props {
 export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
-  const neighborhoodName = params.slug
+  const { slug } = await params;
+  const neighborhoodName = slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
@@ -42,7 +43,8 @@ export async function generateMetadata(
 }
 
 export default async function NeighborhoodPage({ params }: Props) {
-  const neighborhoodName = params.slug
+  const { slug } = await params;
+  const neighborhoodName = slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');

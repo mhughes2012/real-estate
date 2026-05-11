@@ -38,7 +38,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ property }) => {
         <div className="flex justify-between items-start mb-2">
           <Link href={`/properties/${property.id}`} className="flex-1">
             <h3 className="text-md font-bold text-navy uppercase hover:text-gold transition-colors" title={property.title}>
-              {property.address.full} in {property.address.city}: {property.subDivision} {property.type}
+               {property.subDivision} {property.type}
             </h3>
           </Link>
           <span className="text-gold font-bold text-xl ml-4">
@@ -52,8 +52,9 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ property }) => {
         </div>
 
         <div className="flex items-center text-gray-500 text-sm mb-4">
-
-          <span>{property.description}</span>
+          <span className="block max-h-[120px] overflow-y-auto whitespace-pre-line">
+            {property.description}
+          </span>
         </div>
 
         <div className="flex items-center justify-between text-gray-600 border-t border-white-muted pt-4 mb-4">

@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { isYoutubeUrl, getYoutubeThumbnail, getYoutubeEmbedUrl } from '@/utils/youtube';
 
 interface PropertyImageSliderProps {
   images: string[];
@@ -12,6 +13,7 @@ interface PropertyImageSliderProps {
 export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images, title }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   if (!images || images.length === 0) {
     return (
@@ -21,17 +23,23 @@ export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images
     );
   }
 
-  const handlePrevious = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
-  };
-
   const handleNext = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsPlaying(false);
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
   };
+
+  const handlePrevious = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsPlaying(false);
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+  };
+
+  const currentImageUrl = images[currentIndex];
+  const isYoutube = isYoutubeUrl(currentImageUrl);
+  const displayImage = isYoutube ? getYoutubeThumbnail(currentImageUrl) : currentImageUrl;
 
   return (
     <div 
@@ -42,13 +50,37 @@ export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images
       {/* Fallback color if image fails to load */}
       <div className="absolute inset-0 bg-navy-light/10" />
       
-      <Image
-        src={images[currentIndex] || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'}
-        alt={`${title} - Image ${currentIndex + 1}`}
-        fill
-        className="object-cover transform transition-transform duration-500 group-hover:scale-105"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
+      {isYoutube && isPlaying ? (
+        <iframe
+          src={getYoutubeEmbedUrl(currentImageUrl) || ''}
+          title={`${title} - Video`}
+          className="absolute inset-0 w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <>
+          <Image
+            src={displayImage || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'}
+            alt={`${title} - Image ${currentIndex + 1}`}
+            fill
+            className="object-cover transform transition-transform duration-500 group-hover:scale-105 cursor-pointer"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            onClick={() => isYoutube && setIsPlaying(true)}
+          />
+          
+          {isYoutube && (
+            <div 
+              className="absolute inset-0 flex items-center justify-center cursor-pointer"
+              onClick={() => setIsPlaying(true)}
+            >
+              <div className="bg-navy/80 text-white p-4 rounded-full backdrop-blur-sm group-hover:bg-gold transition-colors duration-300">
+                <Play fill="currentColor" size={32} />
+              </div>
+            </div>
+          )}
+        </>
+      )}
 
       {images.length > 1 && (
         <>

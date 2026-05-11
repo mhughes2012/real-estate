@@ -5,16 +5,18 @@ import { Navbar } from '@/components/organisms/Navbar';
 import Image from 'next/image';
 import { MapPin, Bed, Bath, Square, Share2, Heart } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
+import { PropertyImageGrid } from '@/components/organisms/PropertyImageGrid';
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 // Dynamic Metadata Generation
 export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
-  const property = await getPropertyById(params.id);
+  const { id } = await params;
+  const property = await getPropertyById(id);
 
   if (!property) {
     return {
@@ -50,7 +52,10 @@ export async function generateMetadata(
 }
 
 export default async function PropertyDetailPage({ params }: Props) {
-  const property = await getPropertyById(params.id);
+  const { id } = await params;
+  const property = await getPropertyById(id);
+
+  console.log('property', property);
 
   if (!property) {
     notFound();
@@ -96,49 +101,8 @@ export default async function PropertyDetailPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Image Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 h-[500px] mb-12">
-            <div className="md:col-span-2 relative overflow-hidden rounded-l-lg">
-              <Image
-                src={property.images[0]}
-                alt={property.title}
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-                priority
-              />
-            </div>
-            <div className="hidden md:grid grid-rows-2 gap-4 col-span-1">
-              <div className="relative overflow-hidden">
-                <Image
-                  src={property.images[1] || property.images[0]}
-                  alt="Property Detail"
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-              <div className="relative overflow-hidden">
-                <Image
-                  src={property.images[0]}
-                  alt="Property Detail"
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-            </div>
-            <div className="hidden md:block relative overflow-hidden rounded-r-lg">
-              <Image
-                src={property.images[0]}
-                alt="Property Detail"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <Button variant="outline" className="text-white border-white hover:bg-white hover:text-navy">
-                  View All Photos
-                </Button>
-              </div>
-            </div>
-          </div>
+          {/* Property Gallery */}
+          <PropertyImageGrid images={property.images} title={property.address.street} />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
