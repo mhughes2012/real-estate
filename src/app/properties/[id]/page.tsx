@@ -33,20 +33,23 @@ export async function generateMetadata(
   const title = `${property.address.street}, ${property.address.city} | ${formattedPrice}`;
   const description = `View this ${property.beds} bed, ${property.baths} bath ${property.type} listing in ${property.address.city}. MLS®: ${property.mlsId}. Contact Sheryl Thompson for details.`;
 
+  const firstImage = property.images.length > 0 ? property.images[0] : null;
+  const imageUrl = typeof firstImage === 'string' ? firstImage : firstImage?.src;
+
   return {
     title,
     description,
     openGraph: {
       title,
       description,
-      images: property.images.length > 0 ? [property.images[0]] : [],
+      images: imageUrl ? [imageUrl] : [],
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: property.images.length > 0 ? [property.images[0]] : [],
+      images: imageUrl ? [imageUrl] : [],
     },
   };
 }

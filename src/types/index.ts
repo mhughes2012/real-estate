@@ -1,3 +1,5 @@
+import { type StaticImageData} from 'next/image';
+
 export interface Property {
   id: string;
   mlsId: string;
@@ -14,7 +16,7 @@ export interface Property {
   beds: number;
   baths: number;
   sqft: number;
-  images: string[];
+  images: (string | StaticImageData)[];
   type: 'House' | 'Condo' | 'Townhouse' | 'Luxury' | string;
   listingType: 'sale' | 'rent';
   status: 'Active' | 'Pending' | 'Sold';

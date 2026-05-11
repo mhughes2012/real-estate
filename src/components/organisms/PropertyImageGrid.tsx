@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import Image, { type StaticImageData } from "next/image";
 import { Button } from '@/components/atoms/Button';
 import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { isYoutubeUrl, getYoutubeThumbnail, getYoutubeEmbedUrl } from '@/utils/youtube';
 
 interface PropertyImageGridProps {
-  images: string[];
+  images: (string | StaticImageData)[];
   title: string;
 }
 
@@ -63,7 +63,7 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
   const renderThumbnail = (index: number, className: string = "") => {
     const imageUrl = images[index % images.length];
     const isYoutube = isYoutubeUrl(imageUrl);
-    const displayImage = isYoutube ? getYoutubeThumbnail(imageUrl) : imageUrl;
+    const displayImage = isYoutube ? getYoutubeThumbnail(imageUrl as string) : imageUrl;
 
     return (
       <div 
@@ -71,7 +71,7 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
         onClick={() => openLightbox(index % images.length)}
       >
         <Image
-          src={displayImage || images[0]}
+          src={displayImage || imageUrl}
           alt={`${title} detail ${index}`}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -109,11 +109,11 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
           {(() => {
             const imageUrl = images[3 % images.length] || images[0];
             const isYoutube = isYoutubeUrl(imageUrl);
-            const displayImage = isYoutube ? getYoutubeThumbnail(imageUrl) : imageUrl;
+            const displayImage = isYoutube ? getYoutubeThumbnail(imageUrl as string) : imageUrl;
             return (
               <>
                 <Image
-                  src={displayImage}
+                  src={displayImage || imageUrl}
                   alt={`${title} detail 3`}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -184,7 +184,7 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {images.map((img, idx) => {
                 const isYoutube = isYoutubeUrl(img);
-                const displayImage = isYoutube ? getYoutubeThumbnail(img) : img;
+                const displayImage = isYoutube ? getYoutubeThumbnail(img as string) : img;
                 return (
                   <div 
                     key={idx} 
@@ -248,7 +248,7 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
             <div className="relative w-full h-full">
               {isYoutubeUrl(images[selectedImage]) ? (
                 <iframe
-                  src={getYoutubeEmbedUrl(images[selectedImage]) || ''}
+                  src={getYoutubeEmbedUrl(images[selectedImage] as string) || ''}
                   title={`${title} - Video`}
                   className="w-full h-full rounded-lg"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

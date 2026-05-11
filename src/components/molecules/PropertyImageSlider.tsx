@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { isYoutubeUrl, getYoutubeThumbnail, getYoutubeEmbedUrl } from '@/utils/youtube';
 
 interface PropertyImageSliderProps {
-  images: string[];
+  images: (string | StaticImageData)[];
   title: string;
 }
 
@@ -39,7 +39,7 @@ export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images
 
   const currentImageUrl = images[currentIndex];
   const isYoutube = isYoutubeUrl(currentImageUrl);
-  const displayImage = isYoutube ? getYoutubeThumbnail(currentImageUrl) : currentImageUrl;
+  const displayImage = isYoutube ? getYoutubeThumbnail(currentImageUrl as string) : currentImageUrl;
 
   return (
     <div 
@@ -52,7 +52,7 @@ export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images
       
       {isYoutube && isPlaying ? (
         <iframe
-          src={getYoutubeEmbedUrl(currentImageUrl) || ''}
+          src={getYoutubeEmbedUrl(currentImageUrl as string) || ''}
           title={`${title} - Video`}
           className="absolute inset-0 w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -61,7 +61,7 @@ export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images
       ) : (
         <>
           <Image
-            src={displayImage || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'}
+            src={displayImage || currentImageUrl || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'}
             alt={`${title} - Image ${currentIndex + 1}`}
             fill
             className="object-cover transform transition-transform duration-500 group-hover:scale-105 cursor-pointer"
