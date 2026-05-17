@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getPropertyById } from '@/lib/api';
 import { Navbar } from '@/components/organisms/Navbar';
 import Image from 'next/image';
-import { MapPin, Bed, Bath, Square, Share2, Heart } from 'lucide-react';
+import { MapPin, Bed, Bath, Square, Share2, Heart, Phone, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
 import { PropertyImageGrid } from '@/components/organisms/PropertyImageGrid';
 
@@ -154,26 +154,27 @@ export default async function PropertyDetailPage({ params }: Props) {
             <div className="lg:col-span-1">
               <div className="bg-white-clean p-8 rounded-lg border border-white-muted sticky top-32">
                 <h3 className="text-xl font-bold text-navy mb-6 uppercase tracking-tight">Interested?</h3>
-                <form className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full px-4 py-3 border border-white-muted rounded focus:outline-none focus:ring-2 focus:ring-gold"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Your Email"
-                    className="w-full px-4 py-3 border border-white-muted rounded focus:outline-none focus:ring-2 focus:ring-gold"
-                  />
-                  <textarea
-                    placeholder="I'm interested in this property..."
-                    rows={4}
-                    className="w-full px-4 py-3 border border-white-muted rounded focus:outline-none focus:ring-2 focus:ring-gold"
-                  ></textarea>
-                  <Button className="w-full uppercase tracking-widest py-4">
-                    Request Info
-                  </Button>
-                </form>
+                <div className="space-y-4">
+                  <p className="text-gray-600 mb-6">
+                    For more information or to schedule a private showing, please call or text Sheryl Thompson directly.
+                  </p>
+                  
+                  <a 
+                    href="tel:403-874-4499" 
+                    className="flex items-center justify-center gap-3 w-full bg-navy text-white py-4 rounded font-bold uppercase tracking-widest hover:bg-navy-light transition-colors"
+                  >
+                    <Phone size={20} className="text-gold" />
+                    403-874-4499
+                  </a>
+                  
+                  <a 
+                    href="sms:403-874-4499" 
+                    className="flex items-center justify-center gap-3 w-full border border-navy text-navy py-4 rounded font-bold uppercase tracking-widest hover:bg-gray-50 transition-colors"
+                  >
+                    <MessageSquare size={20} className="text-gold" />
+                    Text Sheryl
+                  </a>
+                </div>
                 <div className="mt-8 pt-8 border-t border-white-muted text-center">
                   <div className="text-sm text-gray-500 mb-2 uppercase tracking-widest">Listing Agent</div>
                   <div className="font-bold text-navy text-lg">Sheryl Thompson</div>

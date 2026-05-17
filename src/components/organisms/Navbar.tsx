@@ -108,9 +108,6 @@ export const Navbar = () => {
                 )}
               </div>
             ))}
-            <button className="bg-gold text-white px-5 py-2 rounded-sm hover:bg-gold-dark transition-colors font-bold text-xs uppercase tracking-widest">
-              Join My List
-            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -154,9 +151,6 @@ export const Navbar = () => {
                 )}
               </div>
             ))}
-            <button className="w-full mt-4 bg-gold text-white px-6 py-3 rounded-sm font-bold uppercase tracking-widest">
-              Join My List
-            </button>
           </div>
         </div>
       )}

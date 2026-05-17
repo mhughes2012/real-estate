@@ -23,7 +23,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <div className="text-sm uppercase tracking-widest text-gray-500 mb-1 font-bold">Phone</div>
-                  <div className="text-lg font-bold text-navy">(403) 555-0123</div>
+                  <div className="text-lg font-bold text-navy">403-874-4499</div>
                 </div>
               </div>
               
@@ -33,7 +33,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <div className="text-sm uppercase tracking-widest text-gray-500 mb-1 font-bold">Email</div>
-                  <div className="text-lg font-bold text-navy">sheryl@thompsonrealestate.com</div>
+                  <div className="text-lg font-bold text-navy">stagingrealtoryyc@gmail.com</div>
                 </div>
               </div>
               
@@ -43,35 +43,13 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <div className="text-sm uppercase tracking-widest text-gray-500 mb-1 font-bold">Office</div>
-                  <div className="text-lg font-bold text-navy text-wrap">123 Luxury Lane, Calgary, AB T2P 1A1</div>
+                  <div className="text-lg font-bold text-navy text-wrap">202, 5403 Crowchild Trail NW
+                    Calgary, Alberta T3B 4Z1</div>
                 </div>
               </div>
             </div>
           </div>
           
-          <div className="bg-white-clean p-8 rounded-lg border border-white-muted">
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest font-bold text-navy">First Name</label>
-                  <input type="text" className="w-full px-4 py-3 border border-white-muted rounded focus:outline-none focus:ring-2 focus:ring-gold bg-white" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest font-bold text-navy">Last Name</label>
-                  <input type="text" className="w-full px-4 py-3 border border-white-muted rounded focus:outline-none focus:ring-2 focus:ring-gold bg-white" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest font-bold text-navy">Email Address</label>
-                <input type="email" className="w-full px-4 py-3 border border-white-muted rounded focus:outline-none focus:ring-2 focus:ring-gold bg-white" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest font-bold text-navy">Message</label>
-                <textarea rows={6} className="w-full px-4 py-3 border border-white-muted rounded focus:outline-none focus:ring-2 focus:ring-gold bg-white"></textarea>
-              </div>
-              <Button className="w-full py-4 uppercase tracking-widest font-bold">Send Message</Button>
-            </form>
-          </div>
         </div>
       </div>
     </main>
