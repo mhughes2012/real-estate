@@ -1,8 +1,8 @@
 import { CREAMember } from "@/types";
 
-export async function getOathToken(): Promise<string> {
-  const client_id = process.env.CREA_CLIENT_ID || process.env.CLIENT_ID;
-  const client_secret = process.env.CREA_CLIENT_SECRET || process.env.CLIENT_SECRET;
+export async function getOathToken(clientId?: string, clientSecret?: string): Promise<string> {
+  const client_id = clientId || process.env.CREA_CLIENT_ID || process.env.CLIENT_ID;
+  const client_secret = clientSecret || process.env.CREA_CLIENT_SECRET || process.env.CLIENT_SECRET;
 
   if (!client_id || !client_secret) {
     console.error("Missing CREA_CLIENT_ID/CLIENT_ID or CREA_CLIENT_SECRET/CLIENT_SECRET in environment variables");
@@ -61,7 +61,7 @@ export async function getMember(accessToken: string): Promise<CREAMember> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getActiveListings(accessToken: string, memberKey?: string): Promise<any[]> {
+export async function getActiveListings(accessToken: string, memberKey?: string, officeKey?: string): Promise<any[]> {
   const baseUrl = 'https://ddfapi.realtor.ca/odata/v1/Property';
   
   // Base filter for active listings
@@ -71,6 +71,12 @@ export async function getActiveListings(accessToken: string, memberKey?: string)
   if (memberKey) {
     // Note: ListAgentKey is the field for Member Key in CREA DDF OData Property entity
     filter += ` and ListAgentKey eq '${memberKey}'`;
+  }
+
+  // If officeKey is provided, filter listings for that specific office
+  if (officeKey) {
+    // ListOfficeKey is the field for Office Key in CREA DDF OData Property entity
+    filter += ` and ListOfficeKey eq '${officeKey}'`;
   }
   
   const queryParams = new URLSearchParams();
@@ -100,6 +106,34 @@ export async function getActiveListings(accessToken: string, memberKey?: string)
     return data.value || [];
   } catch (error) {
     console.error("Error fetching CREA active listings:", error);
+    throw error;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getListingByKey(accessToken: string, listingKey: string): Promise<any> {
+  const baseUrl = 'https://ddfapi.realtor.ca/odata/v1/Property';
+  const url = `${baseUrl}?$filter=ListingKey eq '${listingKey}'`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Accept': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch listing by key: ${response.status} ${errorText}`);
+    }
+
+    const data = await response.json();
+    // OData filter returns an array in 'value'
+    return data.value && data.value.length > 0 ? data.value[0] : null;
+  } catch (error) {
+    console.error("Error fetching CREA listing by key:", error);
     throw error;
   }
 }

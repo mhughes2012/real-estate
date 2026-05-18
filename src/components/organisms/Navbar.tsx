@@ -13,9 +13,8 @@ const NAV_ITEMS = [
     label: 'Properties',
     href: '/properties',
     dropdown: [
-      { label: 'All Listings', href: '/properties' },
       { label: 'Featured Listings', href: '/properties' },
-      { label: 'Real-Time MLS®', href: '/properties/real-time' },
+      { label: 'All Office Listings', href: '/properties/office' },
     ],
   },
   {

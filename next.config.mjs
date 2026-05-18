@@ -26,6 +26,10 @@ const nextConfig = {
           protocol: 'https',
           hostname: 'youtu.be',
         },
+        {
+          protocol: 'https',
+          hostname: 'findcalgaryhome.ca',
+        }
 
     ],
   },

@@ -131,7 +131,7 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <Button 
               variant="outline" 
-              className="text-white border-white hover:bg-white hover:text-navy"
+              className="text-white border-white hover:!bg-white/90 hover:!text-navy transition-all duration-300"
               onClick={openGallery}
             >
               View All Photos
@@ -142,7 +142,7 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
             <Button 
               variant="outline" 
               size="sm"
-              className="bg-black/40 text-white border-white backdrop-blur-sm"
+              className="bg-black/40 text-white border-white backdrop-blur-sm hover:!bg-white/90 hover:!text-navy transition-all duration-300"
               onClick={openGallery}
             >
               {images.length} Photos
@@ -155,7 +155,7 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
           <Button 
             variant="outline" 
             size="sm"
-            className="bg-black/40 text-white border-white backdrop-blur-sm"
+            className="bg-black/40 text-white border-white backdrop-blur-sm hover:!bg-white/90 hover:!text-navy transition-all duration-300"
             onClick={openGallery}
           >
             View all {images.length} photos

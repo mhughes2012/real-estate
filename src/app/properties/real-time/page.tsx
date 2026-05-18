@@ -9,9 +9,6 @@ export default async function RealTimePropertiesPage() {
   // fetchRealTimeListings uses the native fetch API with caching options
   const properties = await fetchRealTimeListings();
 
-//  console.log("first property:", properties[0]);
-
-
   return (
     <main className="min-h-screen bg-white-clean" >
       <Navbar />

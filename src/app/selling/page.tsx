@@ -20,8 +20,11 @@ export default function SellingPage() {
             <p className="text-gray-500 text-sm leading-relaxed mb-6">
               Our strategic marketing and pricing ensures you get the highest possible return on your investment.
             </p>
-            <Link href="/selling/valuation">
-              <Button variant="outline" className="w-full text-xs uppercase tracking-widest font-bold">Free Valuation</Button>
+            <Link 
+              href="/selling/valuation"
+              className="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 border-2 border-navy text-navy hover:bg-navy hover:text-white focus:ring-navy w-full text-xs uppercase tracking-widest font-bold px-4 py-2 text-base"
+            >
+              Free Valuation
             </Link>
           </div>
           
@@ -33,8 +36,11 @@ export default function SellingPage() {
             <p className="text-white-muted text-sm leading-relaxed mb-6">
               We provide professional staging consultations to make your home stand out in the luxury market.
             </p>
-            <Link href="/selling/guide">
-              <Button className="w-full bg-gold text-white text-xs uppercase tracking-widest font-bold border-none">Seller Guide</Button>
+            <Link 
+              href="/selling/guide"
+              className="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 bg-gold text-white hover:bg-gold-light focus:ring-gold w-full text-xs uppercase tracking-widest font-bold border-none px-4 py-2 text-base"
+            >
+              Seller Guide
             </Link>
           </div>
           

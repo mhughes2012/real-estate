@@ -16,17 +16,19 @@ export default function NotFound() {
             The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/">
-              <Button className="flex items-center gap-2 px-8 py-6 uppercase tracking-widest text-sm font-bold">
-                <Home size={18} />
-                Back to Home
-              </Button>
+            <Link 
+              href="/"
+              className="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 bg-navy text-white hover:bg-navy-light focus:ring-navy flex items-center gap-2 px-8 py-6 uppercase tracking-widest text-sm font-bold"
+            >
+              <Home size={18} />
+              Back to Home
             </Link>
-            <Link href="/properties">
-              <Button variant="outline" className="flex items-center gap-2 px-8 py-6 uppercase tracking-widest text-sm font-bold">
-                <ArrowLeft size={18} />
-                All Listings
-              </Button>
+            <Link 
+              href="/properties"
+              className="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 border-2 border-navy text-navy hover:bg-navy hover:text-white focus:ring-navy flex items-center gap-2 px-8 py-6 uppercase tracking-widest text-sm font-bold"
+            >
+              <ArrowLeft size={18} />
+              All Listings
             </Link>
           </div>
         </div>
