@@ -16,7 +16,7 @@ export default async function RealTimePropertiesPage() {
       <div className="pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto">
           <header className="mb-12">
-            <h1 className="text-4xl font-bold text-navy mb-4">MLS® Listings</h1>
+            <h1 className="text-4xl font-bold text-navy mb-4">Sheryl's Featured Listings</h1>
             <div className="w-20 h-1 bg-gold mt-6" />
           </header>
 
