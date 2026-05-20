@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/organisms/Navbar';
+import { Footer } from '@/components/organisms/Footer';
 
 export default function AboutPage() {
   return (
@@ -10,10 +11,10 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div className="prose prose-navy max-w-none">
             <p className="text-xl text-gray-600 leading-relaxed mb-6">
-              With over 15 years of experience in the luxury real estate market, Sheryl Thompson has built a reputation for excellence, integrity, and unparalleled results.
+              With over 25 years of experience in the luxury real estate market, Sheryl Thompson has built a reputation for excellence, integrity, and unparalleled results.
             </p>
             <p className="text-gray-600 leading-relaxed">
-              Our mission is to provide bespoke real estate services that exceed expectations. Whether you are buying your first home or selling a multi-million dollar estate, we bring the same level of dedication and expertise to every transaction.
+              My mission is to provide bespoke real estate services that exceed expectations. Whether you are buying your first home or selling a multi-million dollar estate, we bring the same level of dedication and expertise to every transaction.
             </p>
           </div>
           <div className="bg-white-clean p-10 border border-white-muted rounded-lg">
@@ -22,6 +23,7 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

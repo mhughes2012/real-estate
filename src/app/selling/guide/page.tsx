@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/organisms/Navbar';
+import { Footer } from '@/components/organisms/Footer';
 
 export default function SellerGuidePage() {
   return (
@@ -26,6 +27,7 @@ export default function SellerGuidePage() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

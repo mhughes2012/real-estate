@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/organisms/Navbar';
+import { Footer } from '@/components/organisms/Footer';
 import { Button } from '@/components/atoms/Button';
 import Link from 'next/link';
 import { DollarSign, Home, BarChart3 } from 'lucide-react';
@@ -56,6 +57,7 @@ export default function SellingPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

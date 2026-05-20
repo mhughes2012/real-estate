@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Navbar } from "@/components/organisms/Navbar";
+import { Footer } from "@/components/organisms/Footer";
 
 export default function BuyerGuidePage() {
     return (
@@ -253,6 +254,7 @@ export default function BuyerGuidePage() {
                     </header>
                 </div>
             </div>
+            <Footer />
         </main>
     );
 }

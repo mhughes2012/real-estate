@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Navbar } from '@/components/organisms/Navbar';
+import { Footer } from '@/components/organisms/Footer';
 import { Button } from '@/components/atoms/Button';
 import { Home, ArrowLeft } from 'lucide-react';
 
@@ -34,13 +35,7 @@ export default function NotFound() {
         </div>
       </div>
       
-      <footer className="bg-navy-dark text-white py-12 border-t border-navy-light mt-auto">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-white-muted text-sm tracking-widest uppercase">
-            © 2026 Sheryl Thompson Real Estate. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

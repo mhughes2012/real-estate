@@ -1,6 +1,7 @@
 import { fetchRealTimeListings } from "@/lib/api";
 import { FeatureCard } from "@/components/molecules/FeatureCard";
 import { Navbar } from "@/components/organisms/Navbar";
+import { Footer } from "@/components/organisms/Footer";
 
 export const dynamic = 'force-dynamic';
 
@@ -33,6 +34,7 @@ export default async function RealTimePropertiesPage() {
           )}
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

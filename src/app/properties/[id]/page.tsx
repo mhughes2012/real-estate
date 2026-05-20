@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPropertyById } from '@/lib/api';
 import { Navbar } from '@/components/organisms/Navbar';
+import { Footer } from '@/components/organisms/Footer';
 import Image from 'next/image';
 import { MapPin, Bed, Bath, Square, Share2, Heart, Phone, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
@@ -184,14 +185,7 @@ export default async function PropertyDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Footer Placeholder */}
-      <footer className="bg-navy-dark text-white py-12 border-t border-navy-light mt-20">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-white-muted text-sm tracking-widest uppercase">
-            © 2026 Sheryl Thompson Real Estate. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

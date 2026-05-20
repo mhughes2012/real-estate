@@ -3,6 +3,7 @@ import { Navbar } from "@/components/organisms/Navbar";
 import { Hero } from "@/components/organisms/Hero";
 import { FeatureCard } from "@/components/molecules/FeatureCard";
 import { TestimonialSlider } from "@/components/organisms/TestimonialSlider";
+import { Footer } from "@/components/organisms/Footer";
 import { getProperties } from "@/lib/api";
 import { Button } from "@/components/atoms/Button";
 
@@ -25,7 +26,7 @@ export default async function Home() {
               <h2 className="text-4xl font-bold text-navy mb-4">Featured Listings</h2>
               <div className="w-24 h-1 bg-gold" />
             </div>
-            <Link href="/properties" className="text-navy hover:text-gold transition-colors font-bold uppercase tracking-widest text-sm mt-4 md:mt-0">
+            <Link href="/properties/office" className="text-navy hover:text-gold transition-colors font-bold uppercase tracking-widest text-sm mt-4 md:mt-0">
               View All Properties →
             </Link>
           </div>
@@ -38,7 +39,7 @@ export default async function Home() {
           
           <div className="mt-16 text-center lg:hidden">
             <Link 
-              href="/properties"
+              href="/properties/office"
               className="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 border-2 border-navy text-navy hover:bg-navy hover:text-white focus:ring-navy w-full px-4 py-2 text-base"
             >
               View All Properties
@@ -56,7 +57,7 @@ export default async function Home() {
           <div className="max-w-3xl">
             <h2 className="text-4xl md:text-5xl font-bold mb-8">Ready to find your <span className="text-gold">dream home</span>?</h2>
             <p className="text-xl text-white-muted mb-10 leading-relaxed">
-              With over 15 years of experience in the luxury real estate market, Sheryl Thompson provides unparalleled expertise and personalized service.
+              With over 25 years of experience in the luxury real estate market, Sheryl Thompson provides unparalleled expertise and personalized service.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
@@ -78,14 +79,7 @@ export default async function Home() {
 
       <TestimonialSlider />
 
-      {/* Footer Placeholder */}
-      <footer className="bg-navy-dark text-white py-12 border-t border-navy-light">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-white-muted text-sm tracking-widest uppercase">
-            © 2026 Sheryl Thompson Real Estate. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

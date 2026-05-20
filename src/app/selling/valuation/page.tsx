@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/organisms/Navbar';
+import { Footer } from '@/components/organisms/Footer';
 import { Button } from '@/components/atoms/Button';
 import {Mail, Phone} from "lucide-react";
 
@@ -16,7 +17,7 @@ export default function HomeValuationPage() {
               <Phone size={24} />
             </div>
             <div>
-              <div className="text-sm uppercase tracking-widest text-gray-500 mb-1 font-bold">Phone</div>
+              <div className="text-sm uppercase tracking-widest text-gray-500 mb-1 font-bold">Phone/Text</div>
               <div className="text-lg font-bold text-navy">403-874-4499</div>
             </div>
           </div>
@@ -32,6 +33,7 @@ export default function HomeValuationPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

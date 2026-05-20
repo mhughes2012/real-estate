@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { Navbar } from '@/components/organisms/Navbar';
+import { Footer } from '@/components/organisms/Footer';
 import { getProperties } from '@/lib/api';
 import { FeatureCard } from '@/components/molecules/FeatureCard';
 import { MapPin, Info, TrendingUp } from 'lucide-react';
@@ -154,14 +155,7 @@ export default async function NeighborhoodPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Footer Placeholder */}
-      <footer className="bg-navy-dark text-white py-12 border-t border-navy-light mt-20">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-white-muted text-sm tracking-widest uppercase">
-            © 2026 Sheryl Thompson Real Estate. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
