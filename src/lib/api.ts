@@ -21,6 +21,7 @@ const MOCK_PROPERTIES: Property[] = [
     images: [
       "https://cdn.realtor.ca/listings/TS639120467633400000/reb9/highres/0/A2302920_1.jpg",
       "https://cdn.realtor.ca/listings/TS639120467633400000/reb9/highres/0/A2302920_2.jpg",
+      "https://youriguide.com/24_citadel_close_nw_calgary_ab/",
     ],
     type: "Apartment",
     listingType: "sale",

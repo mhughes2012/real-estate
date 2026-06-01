@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Property } from '@/types';
 import { Bed, Bath, Square, MapPin } from 'lucide-react';
 import { PropertyImageSlider } from './PropertyImageSlider';
+import { FavoriteButton } from './FavoriteButton';
 
 interface FeatureCardProps {
   property: Property;
@@ -16,11 +17,16 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ property }) => {
   }).format(property.price);
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden border border-white-muted group hover:shadow-xl transition-all duration-300">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden border border-white-muted group hover:shadow-xl transition-all duration-300 relative">
+      {/* Favorite Button - Absolute positioned relative to the whole card to avoid nesting in Link */}
+      <div className="absolute top-4 right-4 z-30">
+        <FavoriteButton propertyId={property.id} className="w-10 h-10 p-0 shadow-lg" />
+      </div>
+
       {/* Image Container */}
-      <div className="relative h-64 w-full">
+      <Link href={`/properties/${property.id}`} className="block relative h-64 w-full">
         <PropertyImageSlider images={property.images} title={property.title} />
-        <div className="absolute top-4 left-4 bg-navy text-white px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+        <div className="absolute top-4 left-4 bg-navy text-white px-3 py-1 text-xs font-semibold uppercase tracking-wider z-10">
           {property.listingType === 'sale' ? 'For Sale' : 'For Rent'}
         </div>
         {property.status === 'Sold' && (
@@ -30,7 +36,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ property }) => {
              </span>
           </div>
         )}
-      </div>
+      </Link>
 
       {/* Content */}
 

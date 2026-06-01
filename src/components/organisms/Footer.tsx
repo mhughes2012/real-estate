@@ -1,7 +1,13 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 
 export const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = useState(2026);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
   
   return (
     <footer className="bg-navy-dark text-white py-12 border-t border-navy-light mt-auto">

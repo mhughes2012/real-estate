@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Image, { type StaticImageData } from "next/image";
 import { Button } from '@/components/atoms/Button';
-import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import {X, ChevronLeft, ChevronRight, Play, Rotate3d} from 'lucide-react';
 import { isYoutubeUrl, getYoutubeThumbnail, getYoutubeEmbedUrl } from '@/utils/youtube';
+import { isIguideUrl, getIguidePreviewUrl, getIguideEmbedUrl } from '@/utils/iguide';
 
 interface PropertyImageGridProps {
   images: (string | StaticImageData)[];
@@ -60,10 +61,15 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
 
   if (!images || images.length === 0) return null;
 
-  const renderThumbnail = (index: number, className: string = "") => {
+  const renderThumbnail = (index: number, className: string = "", children?: React.ReactNode) => {
     const imageUrl = images[index % images.length];
     const isYoutube = isYoutubeUrl(imageUrl);
-    const displayImage = isYoutube ? getYoutubeThumbnail(imageUrl as string) : imageUrl;
+    const isIguide = isIguideUrl(imageUrl);
+    const displayImage = isYoutube 
+      ? getYoutubeThumbnail(imageUrl as string) 
+      : isIguide 
+        ? getIguidePreviewUrl(imageUrl as string)
+        : imageUrl;
 
     return (
       <div 
@@ -84,6 +90,14 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
             </div>
           </div>
         )}
+        {isIguide && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="bg-navy/60 text-white p-3 rounded-full backdrop-blur-sm group-hover:bg-gold transition-colors duration-300">
+              <Rotate3d size={24} />
+            </div>
+          </div>
+        )}
+        {children}
       </div>
     );
   };
@@ -102,32 +116,7 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
         </div>
 
         {/* Right Column with View All Button Overlay */}
-        <div 
-          className="hidden md:block relative overflow-hidden rounded-r-lg cursor-pointer group"
-          onClick={() => openLightbox(3 % images.length)}
-        >
-          {(() => {
-            const imageUrl = images[3 % images.length] || images[0];
-            const isYoutube = isYoutubeUrl(imageUrl);
-            const displayImage = isYoutube ? getYoutubeThumbnail(imageUrl as string) : imageUrl;
-            return (
-              <>
-                <Image
-                  src={displayImage || imageUrl}
-                  alt={`${title} detail 3`}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                {isYoutube && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-navy/60 text-white p-3 rounded-full backdrop-blur-sm group-hover:bg-gold transition-colors duration-300">
-                      <Play fill="currentColor" size={24} />
-                    </div>
-                  </div>
-                )}
-              </>
-            );
-          })()}
+        {renderThumbnail(3, "hidden md:block rounded-r-lg", (
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <Button 
               variant="outline" 
@@ -137,18 +126,7 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
               View All Photos
             </Button>
           </div>
-          {/* Mobile/Always visible button for easy access */}
-          <div className="absolute bottom-4 right-4 md:hidden">
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="bg-black/40 text-white border-white backdrop-blur-sm hover:!bg-white/90 hover:!text-navy transition-all duration-300"
-              onClick={openGallery}
-            >
-              {images.length} Photos
-            </Button>
-          </div>
-        </div>
+        ))}
         
         {/* Mobile View All Button (visible only on small screens) */}
         <div className="md:hidden absolute bottom-4 right-8 z-10">
@@ -184,7 +162,12 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {images.map((img, idx) => {
                 const isYoutube = isYoutubeUrl(img);
-                const displayImage = isYoutube ? getYoutubeThumbnail(img as string) : img;
+                const isIguide = isIguideUrl(img);
+                const displayImage = isYoutube 
+                  ? getYoutubeThumbnail(img as string) 
+                  : isIguide
+                    ? getIguidePreviewUrl(img as string)
+                    : img;
                 return (
                   <div 
                     key={idx} 
@@ -204,9 +187,16 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
                         </div>
                       </div>
                     )}
+                    {isIguide && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="bg-navy/60 text-white p-3 rounded-full backdrop-blur-sm group-hover:bg-gold transition-colors duration-300">
+                          <Rotate3d size={24} />
+                        </div>
+                      </div>
+                    )}
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
                       <span className="text-white text-sm font-medium">
-                        {isYoutube ? 'Video' : `Photo ${idx + 1}`}
+                        {isYoutube ? 'Video' : isIguide ? 'Interactive Tour' : `Photo ${idx + 1}`}
                       </span>
                     </div>
                   </div>
@@ -253,6 +243,14 @@ export const PropertyImageGrid: React.FC<PropertyImageGridProps> = ({ images, ti
                   className="w-full h-full rounded-lg"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                />
+              ) : isIguideUrl(images[selectedImage]) ? (
+                <iframe
+                  src={getIguideEmbedUrl(images[selectedImage] as string) || ''}
+                  title={`${title} - Interactive Tour`}
+                  className="w-full h-full rounded-lg bg-white"
+                  allowFullScreen
+                  frameBorder="0"
                 />
               ) : (
                 <Image

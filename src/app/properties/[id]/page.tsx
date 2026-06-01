@@ -4,9 +4,10 @@ import { getPropertyById } from '@/lib/api';
 import { Navbar } from '@/components/organisms/Navbar';
 import { Footer } from '@/components/organisms/Footer';
 import Image from 'next/image';
-import { MapPin, Bed, Bath, Square, Share2, Heart, Phone, MessageSquare } from 'lucide-react';
+import { MapPin, Bed, Bath, Square, Phone, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
 import { PropertyImageGrid } from '@/components/organisms/PropertyImageGrid';
+import { FavoriteButton } from '@/components/molecules/FavoriteButton';
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -93,12 +94,12 @@ export default async function PropertyDetailPage({ params }: Props) {
             <div className="mt-4 md:mt-0 text-right">
               <div className="text-3xl md:text-4xl font-bold text-navy mb-2">{formattedPrice}</div>
               <div className="flex gap-2 justify-end">
-                <Button variant="outline" size="sm" className="rounded-full w-10 h-10 p-0">
-                  <Heart size={20} />
-                </Button>
+                <FavoriteButton propertyId={property.id} className="w-10 h-10 p-0" />
+                {/* 
                 <Button variant="outline" size="sm" className="rounded-full w-10 h-10 p-0">
                   <Share2 size={20} />
                 </Button>
+                */}
               </div>
             </div>
           </div>

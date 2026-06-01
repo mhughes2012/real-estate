@@ -16,6 +16,26 @@ const nextConfig = {
         },
         {
           protocol: 'https',
+          hostname: '*.youriguide.com',
+        },
+        {
+          protocol: 'https',
+          hostname: 'iguidephotos.com',
+        },
+        {
+          protocol: 'https',
+          hostname: '*.iguidephotos.com',
+        },
+        {
+          protocol: 'https',
+          hostname: 'iguideradix.com',
+        },
+        {
+          protocol: 'https',
+          hostname: '*.iguideradix.com',
+        },
+        {
+          protocol: 'https',
           hostname: 'img.youtube.com',
         },
         {

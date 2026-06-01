@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import Image, { type StaticImageData } from 'next/image';
-import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
-import { isYoutubeUrl, getYoutubeThumbnail, getYoutubeEmbedUrl } from '@/utils/youtube';
+import { ChevronLeft, ChevronRight, Play, Rotate3d } from 'lucide-react';
+import { isYoutubeUrl, getYoutubeThumbnail } from '@/utils/youtube';
+import { isIguideUrl, getIguidePreviewUrl } from '@/utils/iguide';
 
 interface PropertyImageSliderProps {
   images: (string | StaticImageData)[];
@@ -13,7 +14,6 @@ interface PropertyImageSliderProps {
 export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images, title }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
 
   if (!images || images.length === 0) {
     return (
@@ -26,20 +26,23 @@ export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images
   const handleNext = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsPlaying(false);
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
   };
 
   const handlePrevious = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsPlaying(false);
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
   };
 
   const currentImageUrl = images[currentIndex];
   const isYoutube = isYoutubeUrl(currentImageUrl);
-  const displayImage = isYoutube ? getYoutubeThumbnail(currentImageUrl as string) : currentImageUrl;
+  const isIguide = isIguideUrl(currentImageUrl);
+  const displayImage = isYoutube 
+    ? getYoutubeThumbnail(currentImageUrl as string) 
+    : isIguide
+      ? getIguidePreviewUrl(currentImageUrl as string)
+      : currentImageUrl;
 
   return (
     <div 
@@ -50,63 +53,59 @@ export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images
       {/* Fallback color if image fails to load */}
       <div className="absolute inset-0 bg-navy-light/10" />
       
-      {isYoutube && isPlaying ? (
-        <iframe
-          src={getYoutubeEmbedUrl(currentImageUrl as string) || ''}
-          title={`${title} - Video`}
-          className="absolute inset-0 w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
+      <>
+        <Image
+          src={displayImage || currentImageUrl || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'}
+          alt={`${title} - Image ${currentIndex + 1}`}
+          fill
+          className="object-cover transform transition-transform duration-500 group-hover:scale-105 cursor-pointer"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-      ) : (
-        <>
-          <Image
-            src={displayImage || currentImageUrl || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070'}
-            alt={`${title} - Image ${currentIndex + 1}`}
-            fill
-            className="object-cover transform transition-transform duration-500 group-hover:scale-105 cursor-pointer"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            onClick={() => isYoutube && setIsPlaying(true)}
-          />
-          
-          {isYoutube && (
-            <div 
-              className="absolute inset-0 flex items-center justify-center cursor-pointer"
-              onClick={() => setIsPlaying(true)}
-            >
-              <div className="bg-navy/80 text-white p-4 rounded-full backdrop-blur-sm group-hover:bg-gold transition-colors duration-300">
-                <Play fill="currentColor" size={32} />
-              </div>
+        
+        {isYoutube && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="bg-navy/80 text-white p-4 rounded-full backdrop-blur-sm group-hover:bg-gold transition-colors duration-300">
+              <Play fill="currentColor" size={32} />
             </div>
-          )}
-        </>
-      )}
+          </div>
+        )}
+
+        {isIguide && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="bg-navy/80 text-white p-4 rounded-full backdrop-blur-sm group-hover:bg-gold transition-colors duration-300">
+              <Rotate3d size={32} />
+            </div>
+          </div>
+        )}
+      </>
 
       {images.length > 1 && (
         <>
-          {/* Navigation Arrows */}
-          <button
+          {/* Navigation Arrows - Using div instead of button to avoid nested interactive elements hydration error */}
+          <div
+            role="button"
             onClick={handlePrevious}
-            className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full transition-opacity duration-300 ${
+            className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full transition-opacity duration-300 z-10 ${
               isHovered ? 'opacity-100' : 'opacity-0'
             }`}
             aria-label="Previous image"
           >
             <ChevronLeft size={20} />
-          </button>
-          <button
+          </div>
+          <div
+            role="button"
             onClick={handleNext}
-            className={`absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full transition-opacity duration-300 ${
+            className={`absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full transition-opacity duration-300 z-10 ${
               isHovered ? 'opacity-100' : 'opacity-0'
             }`}
             aria-label="Next image"
           >
             <ChevronRight size={20} />
-          </button>
+          </div>
 
           {/* Indicators - Only show dots if 10 or fewer images, otherwise just rely on the counter */}
           {images.length <= 10 && (
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
               {images.map((_, index) => (
                 <div
                   key={index}
@@ -119,7 +118,7 @@ export const PropertyImageSlider: React.FC<PropertyImageSliderProps> = ({ images
           )}
 
           {/* Counter */}
-          <div className="absolute top-4 right-4 bg-black/50 text-white text-[10px] px-2 py-1 rounded font-medium backdrop-blur-sm transition-opacity duration-300">
+          <div className="absolute top-4 right-4 bg-black/50 text-white text-[10px] px-2 py-1 rounded font-medium backdrop-blur-sm transition-opacity duration-300 z-10">
             {currentIndex + 1} / {images.length}
           </div>
         </>
