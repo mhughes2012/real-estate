@@ -163,7 +163,7 @@ export async function fetchRealTimeListings(): Promise<Property[]> {
 }
 
 /**
- * Fetches all office listings from CREA DDF API.
+ * Fetches all office listings from CREA DDF API. test
  */
 export async function fetchOfficeListings(): Promise<Property[]> {
   try {
@@ -191,7 +191,7 @@ export async function getPropertyById(id: string): Promise<Property | undefined>
     // 1. Try with agent credentials first
     const accessToken = await getOathToken();
     const listing = await getListingByKey(accessToken, id);
-    
+
     if (listing) {
       return mapListingToProperty(listing);
     }
@@ -206,7 +206,7 @@ export async function getPropertyById(id: string): Promise<Property | undefined>
       process.env.OFFICE_CLIENT_SECRET
     );
     const listing = await getListingByKey(officeToken, id);
-    
+
     if (listing) {
       return mapListingToProperty(listing);
     }
