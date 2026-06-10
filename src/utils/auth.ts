@@ -64,9 +64,15 @@ export async function getMember(accessToken: string): Promise<CREAMember> {
 export async function getActiveListings(accessToken: string, memberKey?: string, officeKey?: string): Promise<any[]> {
   const baseUrl = 'https://ddfapi.realtor.ca/odata/v1/Property';
   
-  // Base filter for active listings
-  let filter = "StandardStatus eq 'Active'";
-  
+  // Calculate the date 90 days ago for including recently sold listings
+  const ninetyDaysAgo = new Date();
+  ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+  const dateStr = ninetyDaysAgo.toISOString().split('T')[0] + 'T00:00:00Z';
+
+  // Base filter for active and recently closed (sold) listings
+  // Using fully qualified enumeration literals for OData v4
+  let filter = `(StandardStatus eq DDF.Core.Entities.StandardStatus'Active' or (StandardStatus eq DDF.Core.Entities.StandardStatus'Closed' and ModificationTimestamp ge ${dateStr}))`;
+
   // If memberKey is provided, filter listings for that specific agent
   if (memberKey) {
     // Note: ListAgentKey is the field for Member Key in CREA DDF OData Property entity
@@ -98,14 +104,14 @@ export async function getActiveListings(accessToken: string, memberKey?: string,
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Failed to fetch active listings: ${response.status} ${errorText}`);
+      throw new Error(`Failed to fetch listings: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
     // OData v4 usually returns an object with a 'value' property containing the array
     return data.value || [];
   } catch (error) {
-    console.error("Error fetching CREA active listings:", error);
+    console.error("Error fetching CREA listings:", error);
     throw error;
   }
 }
