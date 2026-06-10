@@ -63,8 +63,8 @@ export async function getMember(accessToken: string): Promise<CREAMember> {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getActiveListings(accessToken: string, memberKey?: string, officeKey?: string): Promise<any[]> {
   const baseUrl = 'https://ddfapi.realtor.ca/odata/v1/Property';
-  
-  // Calculate the date 90 days ago for including recently sold listings
+
+  // Calculate the date 90 days ago for including recently sold listings test
   const ninetyDaysAgo = new Date();
   ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
   const dateStr = ninetyDaysAgo.toISOString().split('T')[0] + 'T00:00:00Z';
@@ -84,11 +84,11 @@ export async function getActiveListings(accessToken: string, memberKey?: string,
     // ListOfficeKey is the field for Office Key in CREA DDF OData Property entity
     filter += ` and ListOfficeKey eq '${officeKey}'`;
   }
-  
+
   const queryParams = new URLSearchParams();
   queryParams.append('$filter', filter);
   queryParams.append('$orderby', 'ModificationTimestamp desc');
-  
+
   const url = `${baseUrl}?${queryParams.toString()}`;
 
   try {
@@ -99,7 +99,7 @@ export async function getActiveListings(accessToken: string, memberKey?: string,
         'Accept': 'application/json',
       },
       // Using Next.js cache options if available in this context
-      // next: { revalidate: 3600 } 
+      // next: { revalidate: 3600 }
     });
 
     if (!response.ok) {
