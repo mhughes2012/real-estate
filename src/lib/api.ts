@@ -80,10 +80,9 @@ const MOCK_PROPERTIES: Property[] = [
 export async function getProperties(): Promise<Property[]> {
   try {
     const properties = await fetchRealTimeListings();
-    console.log(`[API] getProperties found ${properties.length} real-time properties`);
     return properties.length > 0 ? properties : MOCK_PROPERTIES;
   } catch (error) {
-    console.error("[API] Error in getProperties:", error);
+    console.error("Error in getProperties:", error);
     return MOCK_PROPERTIES;
   }
 }
@@ -144,40 +143,26 @@ function mapListingToProperty(item: any): Property {
  */
 export async function fetchRealTimeListings(): Promise<Property[]> {
   try {
-    console.log("[API] Starting fetchRealTimeListings...");
-
     // 1. Get OAuth Token
     const accessToken = await getOathToken();
 
     // 2. Fetch Member details to get the agent's ID
     const member = await getMember(accessToken);
-    const memberName = member.FullName || `${member.MemberFirstName || ""} ${member.MemberLastName || ""}`.trim() || "No name";
-    console.log(`[API] Fetched member: ${member.MemberKey} (${memberName}). OfficeKey: ${member.OfficeKey}`);
 
     // 3. Fetch active listings for this agent
     const listings = await getActiveListings(accessToken, member.MemberKey);
-    
-    if (listings.length === 0) {
-      console.warn(`[API] ZERO listings found for member ${member.MemberKey}. This could mean the member has no active listings or the filter is too restrictive.`);
-    } else {
-      console.log(`[API] Fetched ${listings.length} raw listings from CREA`);
-      console.log("[API] Sample raw listing ListingKey:", listings[0].ListingKey);
-    }
 
     // 4. Map CREA DDF OData response to our Property interface
-    const mappedProperties = listings.map(mapListingToProperty);
-    console.log(`[API] Mapped ${mappedProperties.length} properties`);
-
-    return mappedProperties;
+    return listings.map(mapListingToProperty);
   } catch (error) {
-    console.error("[API] Error fetching real-time listings from CREA DDF:", error);
+    console.error("Error fetching real-time listings from CREA DDF:", error);
     // Fallback to mock data for demo purposes if the API fails or is not configured
     return MOCK_PROPERTIES;
   }
 }
 
 /**
- * Fetches all office listings from CREA DDF API. test
+ * Fetches all office listings from CREA DDF API.
  */
 export async function fetchOfficeListings(): Promise<Property[]> {
   try {
@@ -188,16 +173,14 @@ export async function fetchOfficeListings(): Promise<Property[]> {
 
     // 1. Fetch Member details to get the office ID
     const member = await getMember(accessToken);
-    console.log(`[API] Fetched office member: ${member.MemberKey}. OfficeKey: ${member.OfficeKey}`);
 
     // 2. Fetch all active listings for this office
     // We use the OfficeKey from the member record
     const listings = await getActiveListings(accessToken, undefined, member.OfficeKey);
-    console.log(`[API] Fetched ${listings.length} office listings`);
 
     return listings.map(mapListingToProperty);
   } catch (error) {
-    console.error("[API] Error fetching office listings from CREA DDF:", error);
+    console.error("Error fetching office listings from CREA DDF:", error);
     return MOCK_PROPERTIES;
   }
 }

@@ -4,8 +4,6 @@ export async function getOathToken(clientId?: string, clientSecret?: string): Pr
   const client_id = clientId || process.env.CREA_CLIENT_ID || process.env.CLIENT_ID;
   const client_secret = clientSecret || process.env.CREA_CLIENT_SECRET || process.env.CLIENT_SECRET;
 
-  console.log(`[Auth] Attempting to get OAuth token. Client ID present: ${!!client_id}, Client Secret present: ${!!client_secret}`);
-
   if (!client_id || !client_secret) {
     console.error("Missing CREA_CLIENT_ID/CLIENT_ID or CREA_CLIENT_SECRET/CLIENT_SECRET in environment variables");
     throw new Error("Authentication configuration missing");
@@ -28,7 +26,6 @@ export async function getOathToken(clientId?: string, clientSecret?: string): Pr
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`[Auth] Failed to get OAuth token. Status: ${response.status}, Headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()))}, Error: ${errorText}`);
       throw new Error(`Failed to get OAuth token: ${response.status} ${errorText}`);
     }
 
@@ -52,13 +49,10 @@ export async function getMember(accessToken: string): Promise<CREAMember> {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`[Auth] Failed to fetch member details. Status: ${response.status}, Headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()))}, Error: ${errorText}`);
       throw new Error(`Failed to fetch member details: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
-    console.log(`[Auth] Member API raw response keys: ${Object.keys(data).join(", ")}`);
-    if (data.value) console.log(`[Auth] Member value[0] keys: ${Object.keys(data.value[0]).join(", ")}`);
     
     return data.value ? data.value[0] : data;
   } catch (error) {
@@ -71,14 +65,8 @@ export async function getMember(accessToken: string): Promise<CREAMember> {
 export async function getActiveListings(accessToken: string, memberKey?: string, officeKey?: string): Promise<any[]> {
   const baseUrl = 'https://ddfapi.realtor.ca/odata/v1/Property';
 
-  // Calculate the date 90 days ago for including recently sold listings test
-  const ninetyDaysAgo = new Date();
-  ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
-  const dateStr = ninetyDaysAgo.toISOString().split('T')[0] + 'T00:00:00Z';
-
-  // Base filter for active and recently closed (sold) listings
-  // Using fully qualified enumeration literals for OData v4
-  let filter = `(StandardStatus eq DDF.Core.Entities.StandardStatus'Active' or (StandardStatus eq DDF.Core.Entities.StandardStatus'Closed' and ModificationTimestamp ge ${dateStr}))`;
+  // Base filter for active listings
+  let filter = "StandardStatus eq 'Active'";
 
   // If memberKey is provided, filter listings for that specific agent
   if (memberKey) {
@@ -111,12 +99,10 @@ export async function getActiveListings(accessToken: string, memberKey?: string,
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`[Auth] Failed to fetch listings. Status: ${response.status}, URL: ${url}, Headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()))}, Error: ${errorText}`);
       throw new Error(`Failed to fetch listings: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
-    console.log(`[Auth] Successfully fetched ${data.value?.length || 0} listings from CREA DDF. OData context: ${data['@odata.context']}`);
     // OData v4 usually returns an object with a 'value' property containing the array
     return data.value || [];
   } catch (error) {

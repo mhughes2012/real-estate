@@ -51,35 +51,10 @@ export default async function NeighborhoodPage({ params }: Props) {
     .join(' ');
 
   const properties = await getProperties(); // In a real app, filter by neighborhood
-  const isFallback = properties.length === 3 && properties[0].id === "1" && properties[0].mlsId === "A2302920";
-
-  const envStatus = {
-    hasClientId: !!(process.env.CREA_CLIENT_ID || process.env.CLIENT_ID),
-    hasClientSecret: !!(process.env.CREA_CLIENT_SECRET || process.env.CLIENT_SECRET),
-    hasOfficeClientId: !!process.env.OFFICE_CLIENT_ID,
-    hasOfficeClientSecret: !!process.env.OFFICE_CLIENT_SECRET,
-    nodeEnv: process.env.NODE_ENV
-  };
 
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      
-      {/* Troubleshooting log for the user */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            console.log("--- Neighborhood (${neighborhoodName}) Properties Troubleshooting ---");
-            console.log("Listings count:", ${properties.length});
-            console.log("Is using MOCK data:", ${isFallback});
-            console.log("Environment configuration:", ${JSON.stringify(envStatus)});
-            if (${isFallback}) {
-              console.warn("DIAGNOSIS: The app is using MOCK properties. Check server logs for [Auth] or [API] errors to see if it was an authentication failure, a member lookup issue, or if the agent simply has 0 active listings.");
-            }
-            console.log("---------------------------------------------");
-          `
-        }}
-      />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-navy text-white relative overflow-hidden">
