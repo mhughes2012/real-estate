@@ -28,7 +28,7 @@ export async function getOathToken(clientId?: string, clientSecret?: string): Pr
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`[Auth] Failed to get OAuth token. Status: ${response.status}, Error: ${errorText}`);
+      console.error(`[Auth] Failed to get OAuth token. Status: ${response.status}, Headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()))}, Error: ${errorText}`);
       throw new Error(`Failed to get OAuth token: ${response.status} ${errorText}`);
     }
 
@@ -52,11 +52,14 @@ export async function getMember(accessToken: string): Promise<CREAMember> {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`[Auth] Failed to fetch member details. Status: ${response.status}, Error: ${errorText}`);
+      console.error(`[Auth] Failed to fetch member details. Status: ${response.status}, Headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()))}, Error: ${errorText}`);
       throw new Error(`Failed to fetch member details: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
+    console.log(`[Auth] Member API raw response keys: ${Object.keys(data).join(", ")}`);
+    if (data.value) console.log(`[Auth] Member value[0] keys: ${Object.keys(data.value[0]).join(", ")}`);
+    
     return data.value ? data.value[0] : data;
   } catch (error) {
     console.error("Error fetching CREA member details:", error);
@@ -108,12 +111,12 @@ export async function getActiveListings(accessToken: string, memberKey?: string,
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`[Auth] Failed to fetch listings. Status: ${response.status}, URL: ${url}, Error: ${errorText}`);
+      console.error(`[Auth] Failed to fetch listings. Status: ${response.status}, URL: ${url}, Headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()))}, Error: ${errorText}`);
       throw new Error(`Failed to fetch listings: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
-    console.log(`[Auth] Successfully fetched ${data.value?.length || 0} listings from CREA DDF`);
+    console.log(`[Auth] Successfully fetched ${data.value?.length || 0} listings from CREA DDF. OData context: ${data['@odata.context']}`);
     // OData v4 usually returns an object with a 'value' property containing the array
     return data.value || [];
   } catch (error) {
