@@ -9,10 +9,31 @@ export default async function RealTimePropertiesPage() {
   // This is a Next.js Server Component
   // fetchRealTimeListings uses the native fetch API with caching options
   const properties = await fetchRealTimeListings();
+  const envStatus = {
+    hasClientId: !!(process.env.CREA_CLIENT_ID || process.env.CLIENT_ID),
+    hasClientSecret: !!(process.env.CREA_CLIENT_SECRET || process.env.CLIENT_SECRET),
+    nodeEnv: process.env.NODE_ENV
+  };
 
   return (
     <main className="min-h-screen bg-white-clean" >
       <Navbar />
+      
+      {/* Troubleshooting log for the user */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            console.log("--- Real-time Properties Troubleshooting ---");
+            console.log("Listings count:", ${properties.length});
+            console.log("Properties data:", ${JSON.stringify(properties)});
+            console.log("Environment configuration:", ${JSON.stringify(envStatus)});
+            if (${properties.length} === 3 && ${JSON.stringify(properties[0].id)} === "1") {
+              console.warn("NOTE: You are likely seeing MOCK properties because the API fetch failed or returned no results.");
+            }
+            console.log("---------------------------------------------");
+          `
+        }}
+      />
       
       <div className="pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto">

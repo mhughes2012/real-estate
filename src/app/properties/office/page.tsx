@@ -14,10 +14,31 @@ export const dynamic = 'force-dynamic';
 export default async function OfficePropertiesPage() {
   // fetchOfficeListings gets all listings from the office
   const properties = await fetchOfficeListings();
+  const envStatus = {
+    hasOfficeClientId: !!process.env.OFFICE_CLIENT_ID,
+    hasOfficeClientSecret: !!process.env.OFFICE_CLIENT_SECRET,
+    nodeEnv: process.env.NODE_ENV
+  };
 
   return (
     <main className="min-h-screen bg-white-clean">
       <Navbar />
+      
+      {/* Troubleshooting log for the user */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            console.log("--- Office Properties Troubleshooting ---");
+            console.log("Listings count:", ${properties.length});
+            console.log("Properties data:", ${JSON.stringify(properties)});
+            console.log("Environment configuration:", ${JSON.stringify(envStatus)});
+            if (${properties.length} === 3 && ${JSON.stringify(properties[0].id)} === "1") {
+              console.warn("NOTE: You are likely seeing MOCK properties because the API fetch failed or returned no results.");
+            }
+            console.log("---------------------------------------------");
+          `
+        }}
+      />
       
       <div className="pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto">

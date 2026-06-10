@@ -4,6 +4,8 @@ export async function getOathToken(clientId?: string, clientSecret?: string): Pr
   const client_id = clientId || process.env.CREA_CLIENT_ID || process.env.CLIENT_ID;
   const client_secret = clientSecret || process.env.CREA_CLIENT_SECRET || process.env.CLIENT_SECRET;
 
+  console.log(`[Auth] Attempting to get OAuth token. Client ID present: ${!!client_id}, Client Secret present: ${!!client_secret}`);
+
   if (!client_id || !client_secret) {
     console.error("Missing CREA_CLIENT_ID/CLIENT_ID or CREA_CLIENT_SECRET/CLIENT_SECRET in environment variables");
     throw new Error("Authentication configuration missing");
@@ -26,6 +28,7 @@ export async function getOathToken(clientId?: string, clientSecret?: string): Pr
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error(`[Auth] Failed to get OAuth token. Status: ${response.status}, Error: ${errorText}`);
       throw new Error(`Failed to get OAuth token: ${response.status} ${errorText}`);
     }
 
@@ -49,6 +52,7 @@ export async function getMember(accessToken: string): Promise<CREAMember> {
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error(`[Auth] Failed to fetch member details. Status: ${response.status}, Error: ${errorText}`);
       throw new Error(`Failed to fetch member details: ${response.status} ${errorText}`);
     }
 
@@ -104,10 +108,12 @@ export async function getActiveListings(accessToken: string, memberKey?: string,
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error(`[Auth] Failed to fetch listings. Status: ${response.status}, URL: ${url}, Error: ${errorText}`);
       throw new Error(`Failed to fetch listings: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
+    console.log(`[Auth] Successfully fetched ${data.value?.length || 0} listings from CREA DDF`);
     // OData v4 usually returns an object with a 'value' property containing the array
     return data.value || [];
   } catch (error) {
