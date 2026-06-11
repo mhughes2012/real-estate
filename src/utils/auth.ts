@@ -6,7 +6,7 @@ export async function getOathToken(clientId?: string, clientSecret?: string): Pr
 
   if (!client_id || !client_secret) {
     console.error("Missing CREA_CLIENT_ID/CLIENT_ID or CREA_CLIENT_SECRET/CLIENT_SECRET in environment variables");
-    throw new Error("Authentication configuration missing");
+    throw new Error("Authentication configuration missings");
   }
 
   const params = new URLSearchParams();
