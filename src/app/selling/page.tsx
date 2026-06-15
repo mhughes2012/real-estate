@@ -44,17 +44,6 @@ export default function SellingPage() {
               Seller Guide
             </Link>
           </div>
-          
-          <div className="bg-white-clean p-8 border border-white-muted rounded-lg text-center">
-            <div className="bg-gold/10 w-16 h-16 rounded-full flex items-center justify-center text-gold mx-auto mb-6">
-              <BarChart3 size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-navy mb-4 uppercase tracking-tight">Market Insight</h3>
-            <p className="text-gray-500 text-sm leading-relaxed mb-6">
-              Stay ahead with real-time data on local market trends and buyer behavior in your neighborhood.
-            </p>
-            <Button variant="outline" className="w-full text-xs uppercase tracking-widest font-bold">View Reports</Button>
-          </div>
         </div>
       </div>
       <Footer />

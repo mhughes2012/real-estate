@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { Quote, ChevronLeft, ChevronRight, Star, ExternalLink } from 'lucide-react';
 
 const TESTIMONIALS = [
   {
@@ -43,7 +43,15 @@ export const TestimonialSlider = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-navy mb-4">Client Success Stories</h2>
-          <div className="w-24 h-1 bg-gold mx-auto" />
+          <div className="w-24 h-1 bg-gold mx-auto mb-6" />
+          <a
+            href="https://www.google.com/search?q=sheryl+thompson+realtor+calgary&oq=sheryl+thompson+realtor+calgary&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg8MgYIAhBFGDzSAQc3MjNqMGo0qAIAsAIB&sourceid=chrome&ie=UTF-8&zx=1781557320885#lrd=0x53716f2e94674701:0x4947ef12fe369366,1,,,,"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-navy hover:text-gold transition-colors duration-300 text-sm font-medium uppercase tracking-widest"
+          >
+            See my 5* Google Reviews <ExternalLink size={14} />
+          </a>
         </div>
 
         <div className="max-w-4xl mx-auto relative">

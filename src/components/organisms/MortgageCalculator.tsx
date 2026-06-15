@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { DollarSign, Percent, Calendar, Calculator, Info } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
+import Link from "next/link";
 
 export const MortgageCalculator: React.FC = () => {
   // Input states
@@ -211,9 +212,9 @@ export const MortgageCalculator: React.FC = () => {
             </p>
           </div>
 
-          <Button className="w-full mt-8 uppercase tracking-widest py-4">
-            Get Pre-Approved
-          </Button>
+          <Link href="/contact"  className="block w-full text-center bg-gold text-white py-3 my-5 font-bold uppercase tracking-widest text-xs hover:bg-gold-dark transition-colors">
+            Contact Us
+          </Link>
         </div>
       </div>
     </div>

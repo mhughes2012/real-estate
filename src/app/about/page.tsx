@@ -1,5 +1,6 @@
 import { Navbar } from '@/components/organisms/Navbar';
 import { Footer } from '@/components/organisms/Footer';
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
@@ -16,6 +17,9 @@ export default function AboutPage() {
             <p className="text-gray-600 leading-relaxed">
               My mission is to provide bespoke real estate services that exceed expectations. Whether you are buying your first home or selling a multi-million dollar estate, we bring the same level of dedication and expertise to every transaction.
             </p>
+            <Link href="/contact" className="block w-full text-center bg-gold text-white py-3 my-5 font-bold uppercase tracking-widest text-xs hover:bg-gold-dark transition-colors">
+              Contact us
+            </Link>
           </div>
           <div className="bg-white-clean p-10 border border-white-muted rounded-lg">
             <h2 className="text-2xl font-bold text-navy mb-6 uppercase tracking-tight">Our Philosophy</h2>

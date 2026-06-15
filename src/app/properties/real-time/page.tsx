@@ -29,7 +29,7 @@ export default async function RealTimePropertiesPage() {
 
           {properties.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-xl text-gray-500">No listings found at the moment.</p>
+              <p className="text-xl text-gray-500">No listings found at the moment. <a href="/properties/office">View all office listings</a></p>
             </div>
           )}
         </div>
