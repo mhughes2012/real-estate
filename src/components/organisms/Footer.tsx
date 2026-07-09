@@ -15,6 +15,12 @@ export const Footer = () => {
         <p className="text-white-muted text-sm tracking-widest uppercase">
           © {currentYear} Sheryl Thompson Real Estate. All rights reserved.
         </p>
+        <p className="text-white-muted text-xs tracking-widest pt-5">
+          Data is supplied by Pillar 9™ MLS® System. Pillar 9™ is the owner of the copyright in its MLS®System. Data is deemed reliable but is not guaranteed accurate by Pillar 9™.
+         </p>
+        <p className="text-white-muted text-xs tracking-widest">
+          The trademarks MLS®, Multiple Listing Service® and the associated logos are owned by The Canadian Real Estate Association (CREA) and identify the quality of services provided by real estate professionals who are members of CREA. Used under license.
+        </p>
       </div>
     </footer>
   );
