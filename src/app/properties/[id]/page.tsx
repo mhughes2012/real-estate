@@ -145,7 +145,7 @@ export default async function PropertyDetailPage({ params }: Props) {
               <div className="prose prose-navy max-w-none">
                 <h2 className="text-2xl font-bold text-navy mb-4">Description</h2>
                 <p className="text-gray-600 leading-relaxed mb-6">
-                  {property.description || "This stunning luxury home offers the perfect blend of modern elegance and comfortable living. Located in a prime neighborhood, this property features high-end finishes throughout, spacious living areas, and breathtaking views. Experience the epitome of luxury living with Sheryl Thompson."}
+                  {property.description || "This beautiful home offers the perfect blend of modern style and comfortable living. Located in a wonderful neighborhood, this property features quality finishes throughout, spacious living areas, and inviting spaces. Find your perfect home with Sheryl Thompson."}
                 </p>
               </div>
             </div>
@@ -178,7 +178,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                 <div className="mt-8 pt-8 border-t border-white-muted text-center">
                   <div className="text-sm text-gray-500 mb-2 uppercase tracking-widest">Listing Agent</div>
                   <div className="font-bold text-navy text-lg">Sheryl Thompson</div>
-                  <div className="text-gold text-sm font-medium">Luxury Real Estate Specialist</div>
+                  <div className="text-gold text-sm font-medium">Real Estate Specialist</div>
                 </div>
               </div>
             </div>

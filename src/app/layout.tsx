@@ -17,8 +17,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Sheryl Thompson | Luxury Real Estate",
-  description: "Discover premium luxury real estate with Sheryl Thompson. Expert service for buying and selling high-end properties.",
+  title: "Sheryl Thompson | Real Estate Professional",
+  description: "Find your perfect home with Sheryl Thompson. Expert service for buying and selling residential properties with personalized care.",
 };
 
 export default function RootLayout({

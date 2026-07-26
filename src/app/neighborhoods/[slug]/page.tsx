@@ -69,7 +69,7 @@ export default async function NeighborhoodPage({ params }: Props) {
           </h1>
           <div className="w-24 h-1 bg-gold mb-8" />
           <p className="max-w-2xl text-white-muted text-xl leading-relaxed">
-            Discover why {neighborhoodName} is one of the most sought-after communities. Explore luxury listings and expert local insights.
+            Discover why {neighborhoodName} is one of the most sought-after communities. Explore current listings and expert local insights.
           </p>
         </div>
       </section>
@@ -79,7 +79,7 @@ export default async function NeighborhoodPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center">
             <div className="text-gray-500 text-xs uppercase tracking-widest mb-1">Avg. Listing Price</div>
-            <div className="text-2xl font-bold text-navy">$2,450,000</div>
+            <div className="text-2xl font-bold text-navy">$850,000</div>
           </div>
           <div className="text-center">
             <div className="text-gray-500 text-xs uppercase tracking-widest mb-1">Days on Market</div>
@@ -119,12 +119,12 @@ export default async function NeighborhoodPage({ params }: Props) {
             <div className="prose prose-navy max-w-none bg-white-clean p-10 border border-white-muted rounded-lg">
               <h2 className="text-2xl font-bold text-navy mb-6">About {neighborhoodName}</h2>
               <p className="text-gray-600 leading-relaxed mb-6">
-                {neighborhoodName} is renowned for its unique charm and vibrant community. From historic architecture to modern amenities, it offers a lifestyle that is both sophisticated and welcoming.
+                {neighborhoodName} is renowned for its unique charm and vibrant community. From historic architecture to modern amenities, it offers a lifestyle that is both comfortable and welcoming.
               </p>
               <h3 className="text-xl font-bold text-navy mb-4">Local Amenities</h3>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 list-none p-0">
                 <li className="flex items-center gap-2"><Info size={16} className="text-gold" /> Top-rated public & private schools</li>
-                <li className="flex items-center gap-2"><Info size={16} className="text-gold" /> World-class dining and shopping</li>
+                <li className="flex items-center gap-2"><Info size={16} className="text-gold" /> Local dining and shopping</li>
                 <li className="flex items-center gap-2"><Info size={16} className="text-gold" /> Beautiful parks and walking trails</li>
                 <li className="flex items-center gap-2"><Info size={16} className="text-gold" /> Convenient access to public transit</li>
               </ul>

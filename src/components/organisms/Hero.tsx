@@ -7,7 +7,7 @@ export const Hero = () => {
       <div className="w-full">
         <Image
           src="/images/header-1000-wide.jpg"
-          alt="Luxury Home"
+          alt="Beautiful Home"
           width={1000}
           height={371}
           className="w-full h-auto"

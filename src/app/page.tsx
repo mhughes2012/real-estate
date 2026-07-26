@@ -63,7 +63,7 @@ export default async function Home() {
           <div className="max-w-3xl">
             <h2 className="text-4xl md:text-5xl font-bold mb-8">Ready to find your <span className="text-gold">dream home</span>?</h2>
             <p className="text-xl text-white-muted mb-10 leading-relaxed">
-              With over 25 years of experience in the luxury real estate market, Sheryl Thompson provides unparalleled expertise and personalized service.
+              With over 25 years of experience in the real estate market, Sheryl Thompson provides expert guidance and personalized service for every client.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 

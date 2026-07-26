@@ -35,7 +35,7 @@ export default function SellingPage() {
             </div>
             <h3 className="text-xl font-bold mb-4 uppercase tracking-tight">Expert Staging</h3>
             <p className="text-white-muted text-sm leading-relaxed mb-6">
-              We provide professional staging consultations to make your home stand out in the luxury market.
+              We provide professional staging consultations to make your home stand out to potential buyers.
             </p>
             <Link 
               href="/selling/guide"

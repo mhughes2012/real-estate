@@ -10,13 +10,13 @@ export default function SellerGuidePage() {
         <div className="w-24 h-1 bg-gold mb-12" />
         <div className="prose prose-navy max-w-3xl">
           <p className="text-xl text-gray-600 leading-relaxed mb-8">
-            Selling your luxury home is a significant decision. This guide outlines our comprehensive process to ensure a smooth and successful transaction.
+            Selling your home is a significant decision. This guide outlines our comprehensive process to ensure a smooth and successful transaction.
           </p>
           <div className="space-y-8">
             {[
               { title: '1. Preparation', desc: 'Staging, repairs, and professional photography to showcase your home.' },
               { title: '2. Strategic Pricing', desc: 'Detailed market analysis to determine the optimal listing price.' },
-              { title: '3. Global Marketing', desc: 'Reaching qualified buyers through targeted digital and print campaigns.' },
+              { title: '3. Strategic Marketing', desc: 'Reaching potential buyers through targeted digital and print campaigns.' },
               { title: '4. Negotiation', desc: 'Expertly managing offers to secure the best terms for you.' },
             ].map((step) => (
               <div key={step.title} className="border-l-4 border-gold pl-6 py-2">

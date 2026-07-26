@@ -17,7 +17,7 @@ export interface Property {
   baths: number;
   sqft: number;
   images: (string | StaticImageData)[];
-  type: 'House' | 'Condo' | 'Townhouse' | 'Luxury' | string;
+  type: 'House' | 'Condo' | 'Townhouse' | string;
   listingType: 'sale' | 'rent';
   status: 'Active' | 'Pending' | 'Sold';
   description?: string;
