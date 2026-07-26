@@ -1,89 +1,12 @@
 import { Property } from "@/types";
 import { getOathToken, getMember, getActiveListings, getListingByKey } from "@/utils/auth";
 
-// Mock data for initial development
-const MOCK_PROPERTIES: Property[] = [
-  {
-    id: "1",
-    mlsId: "A2302920",
-    title: "Beltline Apartment",
-    price: 239999,
-    address: {
-      street: "905, 733 14 Avenue SW",
-      city: "Calgary",
-      province: "AB",
-      postalCode: "T2R 0W1",
-      full: "905, 733 14 Avenue SW",
-    },
-    beds: 1,
-    baths: 1,
-    sqft: 615,
-    images: [
-      "https://cdn.realtor.ca/listings/TS639120467633400000/reb9/highres/0/A2302920_1.jpg",
-      "https://cdn.realtor.ca/listings/TS639120467633400000/reb9/highres/0/A2302920_2.jpg",
-      "https://youriguide.com/24_citadel_close_nw_calgary_ab/",
-    ],
-    type: "Apartment",
-    listingType: "sale",
-    status: "Active",
-    subDivision: "Beltline"
-  },
-  {
-    id: "2",
-    mlsId: "A2285375",
-    title: "Arbour Lake House",
-    price: 899900,
-    address: {
-      street: "49 Arbour Crest Heights NW",
-      city: "Calgary",
-      province: "AB",
-      postalCode: "T3G 5A3",
-      full: "49 Arbour Crest Heights NW",
-    },
-    beds: 1,
-    baths: 3.5,
-    sqft: 1466,
-    images: [
-      "https://cdn.realtor.ca/listings/TS639064099439470000/reb9/highres/5/A2285375_1.jpg",
-      "https://cdn.realtor.ca/listings/TS639064099436400000/reb9/highres/5/A2285375_2.jpg",
-    ],
-    type: "House",
-    listingType: "sale",
-    status: "Active",
-    subDivision: "Arbour Lake"
-  },
-  {
-    id: "3",
-    mlsId: "A2312053",
-    title: "Silver Springs Detached",
-    price: 649900,
-    address: {
-      street: "275 Silverview Way NW",
-      city: "Calgary",
-      province: "AB",
-      postalCode: "T3B 3K4",
-      full: "275 Silverview Way NW",
-    },
-    beds: 4,
-    baths: 3,
-    sqft: 1200,
-    images: [
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070",
-    ],
-    type: "House",
-    listingType: "sale",
-    status: "Active",
-    subDivision: "Silver Springs"
-  },
-];
-
 export async function getProperties(): Promise<Property[]> {
   try {
-    const properties = await fetchRealTimeListings();
-    return properties.length > 0 ? properties : MOCK_PROPERTIES;
+    return await fetchRealTimeListings();
   } catch (error) {
     console.error("Error in getProperties:", error);
-    return MOCK_PROPERTIES;
+    return [];
   }
 }
 
@@ -156,8 +79,7 @@ export async function fetchRealTimeListings(): Promise<Property[]> {
     return listings.map(mapListingToProperty);
   } catch (error) {
     console.error("Error fetching real-time listings from CREA DDF:", error);
-    // Fallback to mock data for demo purposes if the API fails or is not configured
-    return MOCK_PROPERTIES;
+    return [];
   }
 }
 
@@ -181,7 +103,7 @@ export async function fetchOfficeListings(): Promise<Property[]> {
     return listings.map(mapListingToProperty);
   } catch (error) {
     console.error("Error fetching office listings from CREA DDF:", error);
-    return MOCK_PROPERTIES;
+    return [];
   }
 }
 
@@ -213,7 +135,7 @@ export async function getPropertyById(id: string): Promise<Property | undefined>
     console.error("Error fetching property by ID from CREA DDF (Office Feed):", error);
   }
 
-  // Fallback: Check featured listings, then office listings (which includes mocks)
+  // Fallback: Check featured listings, then office listings
   const featured = await getProperties();
   const featuredMatch = featured.find((p) => p.id === id);
   if (featuredMatch) return featuredMatch;

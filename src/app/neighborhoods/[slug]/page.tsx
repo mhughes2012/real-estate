@@ -101,11 +101,20 @@ export default async function NeighborhoodPage({ params }: Props) {
           {/* Main Content */}
           <div className="lg:col-span-2">
             <h2 className="text-3xl font-bold text-navy mb-8 uppercase tracking-tight">Current Listings in {neighborhoodName}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-              {properties.map((property) => (
-                <FeatureCard key={property.id} property={property} />
-              ))}
-            </div>
+            {properties.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                {properties.map((property) => (
+                  <FeatureCard key={property.id} property={property} />
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white-clean p-12 text-center rounded-lg border border-white-muted mb-16">
+                <p className="text-gray-500 text-lg">No listings currently available in {neighborhoodName}.</p>
+                <Link href="/contact" className="text-gold font-bold hover:underline mt-4 inline-block">
+                  Notify me when properties become available
+                </Link>
+              </div>
+            )}
 
             <div className="prose prose-navy max-w-none bg-white-clean p-10 border border-white-muted rounded-lg">
               <h2 className="text-2xl font-bold text-navy mb-6">About {neighborhoodName}</h2>

@@ -31,11 +31,17 @@ export default async function Home() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {properties.map((property) => (
-              <FeatureCard key={property.id} property={property} />
-            ))}
-          </div>
+          {properties.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {properties.map((property) => (
+                <FeatureCard key={property.id} property={property} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 border-2 border-dashed border-gray-100 rounded-xl">
+              <p className="text-gray-500 text-lg">No featured listings currently available.</p>
+            </div>
+          )}
           
           <div className="mt-16 text-center lg:hidden">
             <Link 
