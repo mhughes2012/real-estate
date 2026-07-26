@@ -65,23 +65,24 @@ export async function getMember(accessToken: string): Promise<CREAMember> {
 export async function getActiveListings(accessToken: string, memberKey?: string, officeKey?: string): Promise<any[]> {
   const baseUrl = 'https://ddfapi.realtor.ca/odata/v1/Property';
 
-  // Base filter for active listings
-  let filter = "StandardStatus eq 'Active'";
+  const filters: string[] = [];
 
   // If memberKey is provided, filter listings for that specific agent
   if (memberKey) {
     // Note: ListAgentKey is the field for Member Key in CREA DDF OData Property entity
-    filter += ` and ListAgentKey eq '${memberKey}'`;
+    filters.push(`ListAgentKey eq '${memberKey}'`);
   }
 
   // If officeKey is provided, filter listings for that specific office
   if (officeKey) {
     // ListOfficeKey is the field for Office Key in CREA DDF OData Property entity
-    filter += ` and ListOfficeKey eq '${officeKey}'`;
+    filters.push(`ListOfficeKey eq '${officeKey}'`);
   }
 
   const queryParams = new URLSearchParams();
-  queryParams.append('$filter', filter);
+  if (filters.length > 0) {
+    queryParams.append('$filter', filters.join(' and '));
+  }
   queryParams.append('$orderby', 'ModificationTimestamp desc');
 
   const url = `${baseUrl}?${queryParams.toString()}`;

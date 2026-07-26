@@ -55,7 +55,7 @@ function mapListingToProperty(item: any): Property {
     images: images.length > 0 ? images : ["https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070"],
     type: item.PropertySubType || "Residential",
     listingType: 'sale',
-    status: 'Active',
+    status: item.StandardStatus || 'Active',
     subDivision: item.SubdivisionName || "N/A",
     description: cleanDescription(item.PublicRemarks)
   };
