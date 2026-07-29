@@ -6,23 +6,30 @@ import { Quote, ChevronLeft, ChevronRight, Star, ExternalLink } from 'lucide-rea
 const TESTIMONIALS = [
   {
     id: 1,
-    name: 'Devon Lyons',
-    role: 'Home Buyer',
-    content: 'When it came to selling my house this spring, I knew I wanted it sold quickly, and I wanted it sold at top value. I called Sheryl on Wednesday to chat about my situation and she was very prompt about coming right over to help us get started. From there, Sheryl just took over. Sheryl did all the staging, had her photographer come take the photos, and had it posted up on MLS and her website, and this all happened in 3 days in time for 2 open houses that upcoming weekend! The photos taken of the house when they made it onto MLS made me envious of my house, and sure enough, within 5 days of listing my house was sold and for the value I desired! I would highly recommend Sheryl for anybody looking to buy or sell their home.',
+    name: 'Donna Maksymec',
+    role: 'Home Seller',
+    content: 'Our house sale from start to Sold was extraordinary. Sheryl provided us with guidance that made the house presentable and we had a quick sale. So pleased with her service. Would strongly recommend her as your realtor.',
     rating: 5,
   },
   {
     id: 2,
-    name: 'John Plumtree',
-    role: 'Home Buyer',
-    content: 'How do you sell your home during one of the worst economic times in Alberta and (in) the middle of winter? You hire Sheryl Thompson, the best real estate agent around! With Sheryl’s personality and decorating finesse, you can’t go wrong. (The) professional photos taken, as well as the staging by Sheryl, made a huge impact to our listing. Thanks for your hard work and help along the way.',
+    name: 'Devon Lyons',
+    role: 'Home Seller',
+    content: 'When it came to selling my house this spring, I knew I wanted it sold quickly, and I wanted it sold at top value. I called Sheryl on Wednesday to chat about my situation and she was very prompt about coming right over to help us get started. From there, Sheryl just took over. Sheryl did all the staging, had her photographer come take the photos, and had it posted up on MLS and her website, and this all happened in 3 days! Sure enough, within 5 days of listing my house was sold and for the value I desired!',
     rating: 5,
   },
   {
     id: 3,
+    name: 'John Plumtree',
+    role: 'Home Seller',
+    content: 'How do you sell your home during one of the worst economic times in Alberta and (in) the middle of winter? You hire Sheryl Thompson, the best real estate agent around! With Sheryl’s personality and decorating finesse, you can’t go wrong. (The) professional photos taken, as well as the staging by Sheryl, made a huge impact to our listing.',
+    rating: 5,
+  },
+  {
+    id: 4,
     name: 'Mary Becker',
     role: 'Home Buyer',
-    content: 'With Sheryl\'s help, I was able to sell my house right away. She was excellent at explaining the procedures and helping me get through the sell with little stress. She also helped me find the condo I now love. She listened and let me view a number of places until I found the right one, and she explained the procedures with the purchase of my new place. She is very professional and knowledgeable. A great agent to have on your side when buying and selling real estate.',
+    content: 'With Sheryl\'s help, I was able to sell my house right away. She was excellent at explaining the procedures and helping me get through the sell with little stress. She also helped me find the condo I now love. She listened and let me view a number of places until I found the right one. She is very professional and knowledgeable.',
     rating: 5,
   },
 ];
@@ -45,7 +52,7 @@ export const TestimonialSlider = () => {
           <h2 className="text-4xl font-bold text-navy mb-4">Client Success Stories</h2>
           <div className="w-24 h-1 bg-gold mx-auto mb-6" />
           <a
-            href="https://www.google.com/search?q=sheryl+thompson+realtor+calgary&oq=sheryl+thompson+realtor+calgary&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg8MgYIAhBFGDzSAQc3MjNqMGo0qAIAsAIB&sourceid=chrome&ie=UTF-8&zx=1781557320885#lrd=0x53716f2e94674701:0x4947ef12fe369366,1,,,,"
+            href="https://www.google.com/maps/place/Sheryl+Thompson,+Calgary+Realtor/@51.103668,-114.1657508,601m/data=!3m2!1e3!4b1!4m6!3m5!1s0x53716f2e94674701:0x4947ef12fe369366!8m2!3d51.103668!4d-114.1657508!16s%2Fg%2F11b7rxl9t_?entry=ttu"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-navy hover:text-gold transition-colors duration-300 text-sm font-medium uppercase tracking-widest"
