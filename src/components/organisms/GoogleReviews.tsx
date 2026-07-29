@@ -4,19 +4,23 @@ import { ExternalLink } from 'lucide-react';
 
 const REVIEWS = [
   {
-    name: 'Donna Maksymec',
-    content: 'Our house sale from start to Sold was extraordinary. Sheryl provided us with guidance that made the house presentable and we had a quick sale. So pleased with her service. Would strongly recommend her as your realtor.',
-    date: '2022'
+    name: 'Raelyn Bauer',
+    content: 'This review is a little late (December purchase) but worth sending it!  We had a fantastic experience working with Sheryl. From start to finish, she was incredibly attentive and provided excellent customer service every step of the way. We know we were very picky buyers, but she remained patient, supportive, and fully committed to helping us find the right home.\n' +
+        'When we finally found an almost perfect spot, she helped us through the "can\'t live without/can live without" process and was always available to make sure our questions were answered in a very timely manner. She didn’t hesitate to reach out to the seller’s realtor to get the information we needed several times, which gave us confidence in our decisions throughout the process.\n' +
+        'Her responsiveness, professionalism, patience and market knowledge truly sets her apart. We would highly recommend Sheryl to anyone looking for a reliable and amazing realtor!',
+    date: '2026'
   },
   {
-    name: 'Devon Lyons',
-    content: 'Sheryl did all the staging, had her photographer come take the photos, and had it posted up on MLS and her website, and this all happened in 3 days! Within 5 days of listing my house was sold and for the value I desired!',
-    date: '2017'
+    name: 'Cynthia Ruiter',
+    content: 'Our experience with Sheryl was excellent. She listed & sold our home in less then 30 days, with occupancy in just over 30 days. Sheryl virtually stage our home beautifully. I would recommend her whole heartedly, as Sheryl done a wonderful job, & answered all our questions & relieved all our anxieties in the process of selling our home. We can not thank her enough for her professionalism & kindness.\n' +
+        'Cynthia & Philip Ruiter',
+    date: '2026'
   },
   {
-    name: 'Arica Peterson',
-    content: 'I cannot express enough how valuable they have been with the sale of our home. We live out of the province and were highly dependent on them. They did an amazing job staging and did a fantastic job to ensure us the best possible price.',
-    date: '2016'
+    name: 'J. Kubek',
+    content: 'Before listing our home, we sat down with three different real-estate agents to see what they all had to offer. They were all great, however Sheryl stood out and had the best marketing strategy plan by far. That\'s a HUGE part in selling. Your listing needs to stick out amongst all the other comparables for you to get the best out of it, and she delivered. Going in we figured to receive an offer in 3-4 weeks, all being that the market was now trending towards the buyers side, but it only took us a week!\n' +
+        'I can\'t express enough on how grateful we were to have met Sheryl and have her represent us. She\'s was always very translucent, informative, and she wants only the best outcome for her clients. Very, very highly recommended.',
+    date: '2026'
   }
 ];
 

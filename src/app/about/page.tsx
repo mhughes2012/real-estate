@@ -1,6 +1,5 @@
 import { Navbar } from '@/components/organisms/Navbar';
 import { Footer } from '@/components/organisms/Footer';
-import { TestimonialSlider } from '@/components/organisms/TestimonialSlider';
 import { GoogleReviews } from '@/components/organisms/GoogleReviews';
 import Link from "next/link";
 import { Facebook, Instagram } from '@/components/atoms/SocialIcons';
@@ -61,7 +60,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <TestimonialSlider />
       
       <Footer />
     </main>
