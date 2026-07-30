@@ -12,7 +12,7 @@ interface Props {
 
 /**
  * STRATEGY FOR NEIGHBORHOOD LANDING PAGES (Local SEO):
- * 1. URL Structure: /neighborhoods/[slug] (e.g., /neighborhoods/yorkville-toronto)
+ * 1. URL Structure: /neighbourhoods/[slug] (e.g., /neighbourhoods/yorkville-toronto)
  * 2. Keyword Optimization: Target "[Neighborhood Name] Real Estate", "Homes for sale in [Neighborhood]", "[Neighborhood] Market Trends"
  * 3. Dynamic Metadata: Use generateMetadata to create unique titles/descriptions per neighborhood.
  * 4. Local Content: Include neighborhood history, amenities (schools, parks, transit), and market statistics.
@@ -62,7 +62,7 @@ export default async function NeighborhoodPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="flex items-center gap-2 text-gold font-bold text-sm uppercase tracking-widest mb-4">
             <MapPin size={16} />
-            <span>Toronto Neighborhoods</span>
+            <span>Calgary Neighborhoods</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 uppercase tracking-tighter">
             {neighborhoodName} <span className="text-gold">Real Estate</span>
@@ -149,9 +149,9 @@ export default async function NeighborhoodPage({ params }: Props) {
               <div className="border border-white-muted p-8 rounded-lg">
                 <h3 className="text-navy font-bold uppercase text-sm tracking-widest mb-6 border-b border-white-muted pb-4">Other Neighborhoods</h3>
                 <ul className="space-y-4">
-                  {['Rosedale', 'The Annex', 'Forest Hill', 'Bridle Path'].map((area) => (
+                  {['Rosedale', 'Citadel', 'Coventry', 'Edgemont'].map((area) => (
                     <li key={area}>
-                      <Link href={`/neighborhoods/${area.toLowerCase().replace(' ', '-')}`} className="text-gray-600 hover:text-gold flex items-center justify-between group">
+                      <Link href={`/neighbourhoods/${area.toLowerCase().replace(' ', '-')}`} className="text-gray-600 hover:text-gold flex items-center justify-between group">
                         <span>{area}</span>
                         <TrendingUp size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                       </Link>
